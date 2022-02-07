@@ -59,54 +59,55 @@ so 3 timing paths were  reported without the  timing graph
 report_timing -num_paths 100
 Interesting same path both max and min violations 
 Path --input port to D pin :
+![image](https://user-images.githubusercontent.com/56647490/152734645-036b14e9-a4d4-46c1-a95b-26008c0b86e9.png)
+ ![image](https://user-images.githubusercontent.com/56647490/152734473-645c2f69-b23b-4db4-bf56-a844bbfe4324.png)
 
  
-
- 
  
 
-from the report it looks like  G0 is input port.Timing from input port to D pin.Would like to understand how it is facing setup and hold in the same path. 
+## from the report it looks like  G0 is input port.Timing from input port to D pin.Would like to understand how it is facing setup and hold in the same path. 
 
-1.there is no delay between G0 and D pin .Data arrival =0.
-Early.lib findings for DFFR_X2 Pin CK 
- 
+## 1.there is no delay between G0 and D pin .Data arrival =0.
+# Early.lib findings for DFFR_X2 Pin CK 
+![image](https://user-images.githubusercontent.com/56647490/152734742-e5468ec2-7c86-4d29-9685-2bf5cde8bb2f.png)
 
-Late.lib findings for DFFR_X2
- 
+# Late.lib findings for DFFR_X2
+![image](https://user-images.githubusercontent.com/56647490/152734802-d73c2418-5f13-4351-ada8-ec5cdf8f3b44.png)
 
-1ps  is the clock period.(Please correct me if i am wrong i was unable to find out it is nano or pico.
-1.Setup violation: Data is arriving fast without any delay so it is well before the data required time.So there shouldnt have been any setup violation.
-But, Tsetup from late lib is 30.212 ps and clock period = 1ps 
-Port + pin arrival time < = Tperiod -Tsetup
-0< 1ps -30.212ps
-0<-29.212ps which is not true .
-Slack = Data required time - Data arrival time 
-= -29.212 ps
-2. Hold violation: Data in the arrival path should be stable for > Thold .
-Data arrival time = 0ps
-Thold time = 2.183
-0> 2.183ps which is again not true.
-Slack = Data arrival time -Data required time 
-         0-2.183
-= -2.183 
-Day 4:
-Crosstalk 
-1.	When there are signal wires in close proximity to each other, if the signal is changing in one wire then it may impact the signal in the wire close by.
-2.	Signal in the aggressor net help the signal to make transition faster(capacitor and input transition enforces signal in victim net) if the signals in aggressor net and victim net is in same direction.It will be helpful for setup time.
-3.	Signal in the aggressor net help the signal to make transition slower if the signals in aggressor net and victim net is not  in same direction.It will be helpful for  hold  time.
+## 1ps  is the clock period.(Please correct me if i am wrong i was unable to find out it is nano or pico.
+## 1.Setup violation: Data is arriving fast without any delay so it is well before the data required time.So there shouldnt have been any setup violation.
+### But, Tsetup from late lib is 30.212 ps and clock period = 1ps 
+### Port + pin arrival time < = Tperiod -Tsetup
+### 0< 1ps -30.212ps
+### 0<-29.212ps which is not true .
+### Slack = Data required time - Data arrival time 
+### = -29.212 ps
+## 2. Hold violation: Data in the arrival path should be stable for > Thold .
+### Data arrival time = 0ps
+ ### Thold time = 2.183
+### 0> 2.183ps which is again not true.
+### Slack = Data arrival time -Data required time 
+  ###       = 0-2.183
+###     = -2.183 
+# Day 4:
+# Crosstalk 
+### 1.	When there are signal wires in close proximity to each other, if the signal is changing in one wire then it may impact the signal in the wire close by.
+### 2.	Signal in the aggressor net help the signal to make transition faster(capacitor and input transition enforces signal in victim net) if the signals in aggressor net and victim net is in same direction.It will be helpful for setup time.
+### 3.	Signal in the aggressor net help the signal to make transition slower if the signals in aggressor net and victim net is not  in same direction.It will be helpful for  hold  time.
 
-OCV :
-Inter die Variation related to process --> causing different delays --> gates transition time may be different.
-
- 
-Intra die variation: inside a single die there may be different delays due to the timing paths manufactured having process variations.
-STA need to take into account the process variations,operating modes .(logical lib should be appropriately seleted according to max/min delay.)
-
+# OCV :
+### Inter die Variation related to process --> causing different delays --> gates transition time may be different.
 
  
-Clock gating checks:
-Clock gating is used when clock path needs to be controlled by signal.
+![image](https://user-images.githubusercontent.com/56647490/152735208-cfa8f5de-b5a7-43e4-989d-0dbcd8604be2.png)
+### Intra die variation: inside a single die there may be different delays due to the timing paths manufactured having process variations.
+### STA need to take into account the process variations,operating modes .(logical lib should be appropriately seleted according to max/min delay.)
+
+![image](https://user-images.githubusercontent.com/56647490/152735287-4994e240-0992-4f46-afa1-c3a097599d65.png)
  
+# Clock gating checks:
+### Clock gating is used when clock path needs to be controlled by signal.
+ ![image](https://user-images.githubusercontent.com/56647490/152735417-f9e214c3-3722-44e7-ad73-c9072a280a26.png)
 
 
  
