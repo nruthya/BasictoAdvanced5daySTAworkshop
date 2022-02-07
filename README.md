@@ -39,10 +39,10 @@ open timer .log shows "no critical path found "
 so 3 timing paths were  reported without the  timing graph
 
 #  Lab2:
-## 1.difference between Early lib and late lib 
-Early -used for min delay
-Late-used for max delay.
-SDC input delay value changes 10.000 reflected in the report.
+# 1.difference between Early lib and late lib 
+## Early -used for min delay
+## Late-used for max delay.
+# SDC input delay value changes 10.000 reflected in the report.
 
 
 #  Day3 Labs:
