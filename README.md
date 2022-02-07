@@ -237,9 +237,9 @@ ECO
  ![image](https://user-images.githubusercontent.com/56647490/152740713-8017a004-1ec4-4a58-b3b5-b09ea4c95167.png)
  
 Adding one more buffer U16 in the clock path increased the postitve skew which improved the setup time slack.
-Before Timing ECOs slack = 353.185
+## Before Timing ECOs slack = 353.185
 CPPR:6.598
-After timing ECOs
+## After timing ECOs
  
 ![image](https://user-images.githubusercontent.com/56647490/152740816-47381798-73a5-4b84-a6fb-86278bfdf198.png)
  
