@@ -235,7 +235,8 @@ set_case_analysis -specify whether design need to be in test mode or functional 
  ## CPPR:
 CPPR 69.1 -62.5 = 6.6 
 
-ECO
+ECO:
+C2 node impacted by CPPR
  
 ![image](https://user-images.githubusercontent.com/56647490/152740643-75be702e-6037-4837-a6e4-47789b0ac83d.png)
 
