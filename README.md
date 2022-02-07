@@ -126,7 +126,7 @@ Path --input port to D pin :
 ### Hold period is checkded just after the clock makes low to high transition. Setup: EN should be stable for Tsetup time before the clock makes high to low transition.
 ### Hold: EN should be stable for Thold time after the clock makes transition from low to high.
 
-
+![image](https://user-images.githubusercontent.com/56647490/152738041-b2690eff-d4f9-497e-9330-b73b6122d4e7.png)
  
 ### Enable signal should change when clock is low because it will not impact the clock output
  ### Enable is high it is sending the clock to the output.
@@ -134,21 +134,25 @@ Path --input port to D pin :
 ###  Hold: EN should be stable for Thold time after the clock makes transition from high to low.
 
 
-### Truth Table for AND                                                        
- 
-###  Truth Table for OR
+                                                      
+ ![image](https://user-images.githubusercontent.com/56647490/152738240-aea1bbb4-2990-469a-827e-1a65fd9b5f4e.png)
+
  
 # Lab4:
  
  
- 
+ ![image](https://user-images.githubusercontent.com/56647490/152738331-dcfbc8c4-c40c-4159-ba5b-8c2416e2bdc9.png)
 
+
+ ![image](https://user-images.githubusercontent.com/56647490/152738404-93703777-a3ff-4114-b5ef-efc4cb00c521.png)
  
+ ![image](https://user-images.githubusercontent.com/56647490/152738548-abf8eb52-be64-46af-b69e-1fb0ff55d8bc.png)
  
 ### Clock groups :
 ### Synchronous clocks have deterministic phase relationship
 ###  Asnynchronous clocks have no fixed phase relationship.For Async clocks CDC tool are used .STA cannot handle async clocks.
 
+![image](https://user-images.githubusercontent.com/56647490/152738657-42618243-78c7-44fc-b64a-77dd87205440.png)
 
  
 ### Logically exclusive clocks where clocks are chosen by selection.(MUX select). And are prone to crosstalk.
@@ -160,13 +164,15 @@ Path --input port to D pin :
 ### clk1 is async to clk 4 clk5 clk6 similarly clk2 clk3.
 ###  No relation cannot be assumed among clk1 clk2 clk3
  
+![image](https://user-images.githubusercontent.com/56647490/152739602-f8da765e-f35e-40ef-8ae0-524964c8066a.png)
 
+![image](https://user-images.githubusercontent.com/56647490/152739713-cfb01de8-bdb4-47a1-ac53-f19c634a6a74.png)
 
- 
 ### When specify one group there is exception --> clk1 clk2 clk3 are async to all other clocks in the design except between the clk1,clk2 ,clk3.
 
+![image](https://user-images.githubusercontent.com/56647490/152739833-b284293e-2183-4b27-82d0-f9f0b97b981d.png)
 
-#clock properties:
+# clock properties:
  
 
 ### uncertainity:skew of the same clock and inter-clock skew .
@@ -177,10 +183,10 @@ Path --input port to D pin :
 
 # Timing exception :
 # Path specification:
-##-from
-##-to
+## -from
+## -to
 ## -through
- 
+ ![image](https://user-images.githubusercontent.com/56647490/152739914-c08ec05a-ef17-45fb-a441-8ee066248183.png)
 
 # F1/CK -->U1/A --> U1/Z --> F5/D
 # set_path  -from F1/CK -through U1/A  -through U1/Z -to F5/D
@@ -189,15 +195,17 @@ Path --input port to D pin :
 # Set_false_path: Dont time these paths.
 ## set_false_path - from F1/CK -through U1/A  -through U1/Z -to F5/D to be more particular about the path otherwise it will take all the paths down the F1/CK.
 ## set_false_path -from {F1/CK F2/CK }-to {F4/D F5/D}
+
 ###tool will not time the paths F1/CK to F4/D (existing paths) and F2/CK to F5/D }
-## set_multicycle_path -setup 2 -from FF1 -to FF2
 
-## set_multicycle_path -hold 1  -from FF1 -to FF2
+# set_multicycle_path -setup 2 -from FF1 -to FF2
 
-# Muticycle path is used to alter the default setup relationship.In case of default 1 cycle it will be 2 cycle  for meet in timing.
- 
+set_multicycle_path -hold 1  -from FF1 -to FF2
 
-multicycle setup relationship also modifies hold.To alter it back to default hold we can use this command.
+Muticycle path is used to alter the default setup relationship.In case of default 1 cycle it will be 2 cycle  for meet in timing.
+ ![image](https://user-images.githubusercontent.com/56647490/152740109-ca703e17-3c6c-48bd-9815-8c6be0d16bbf.png)
+
+Multicycle setup relationship also modifies hold.To alter it back to default hold we can use this command.
 setup-1 --> hold 
 set_multicycle_path -hold 1  -from FF1 -to FF2
 
@@ -205,31 +213,37 @@ set_max_delay ,set_min _delay to include in timing path to do setup and hold che
 set_disable_timing and set_false_path difference:
 set_disable_timing is essentially used for disabling the timing arc of the cell.
 Set_false_path is more robust where we can choose the  paths that need not be timed.CK@ and CK4 can be set as false path depenging on the requirements where set_disable_timing dont have these options.
-
+![image](https://user-images.githubusercontent.com/56647490/152740175-117a8281-48d5-4e8e-8210-4bffcea524e9.png)
  
 
 Mutliple modes
 set_case_analysis -specify whether design need to be in test mode or functional mode. 
 
-Lab5:
+
+
+# Lab5:
  
+ ![image](https://user-images.githubusercontent.com/56647490/152740360-1ae6dfc2-f238-4cde-82cf-72dded1c8f34.png)
+
+ ![image](https://user-images.githubusercontent.com/56647490/152740489-84abe27e-147c-4967-af14-c47e85cd626d.png)
  
-CPPR:
- 
+ ## CPPR:
 CPPR 69.1 -62.5 = 6.6 
+![image](https://user-images.githubusercontent.com/56647490/152740588-358b140f-0d3f-4836-9043-4db55ae1f220.png)
 ECO
  
+![image](https://user-images.githubusercontent.com/56647490/152740643-75be702e-6037-4837-a6e4-47789b0ac83d.png)
 
+ ![image](https://user-images.githubusercontent.com/56647490/152740713-8017a004-1ec4-4a58-b3b5-b09ea4c95167.png)
  
 Adding one more buffer U16 in the clock path increased the postitve skew which improved the setup time slack.
 Before Timing ECOs slack = 353.185
 CPPR:6.598
 After timing ECOs
  
-
+![image](https://user-images.githubusercontent.com/56647490/152740816-47381798-73a5-4b84-a6fb-86278bfdf198.png)
  
 
-Clock Gating Checks:
  
  
 
