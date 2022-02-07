@@ -43,7 +43,7 @@ so 3 timing paths were  reported without the  timing graph
 ## Early -used for min delay
 ## Late-used for max delay.
 # SDC input delay value changes 10.000 reflected in the report.
-
+![image](https://user-images.githubusercontent.com/56647490/152733839-bf600a2b-6ffd-454a-8fdd-d232bf4c7a3b.png)
 
 #  Day3 Labs:
 1. Consider the following picture
