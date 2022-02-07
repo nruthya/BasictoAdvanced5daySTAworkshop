@@ -137,6 +137,9 @@ Path --input port to D pin :
                                                       
  ![image](https://user-images.githubusercontent.com/56647490/152738240-aea1bbb4-2990-469a-827e-1a65fd9b5f4e.png)
 
+Clock Gating checks:
+
+![image](https://user-images.githubusercontent.com/56647490/152741915-557000c9-70e7-4196-a050-5257e1d3ebc2.png)
  
 # Lab4:
  
