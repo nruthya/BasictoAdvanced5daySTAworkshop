@@ -23,13 +23,13 @@ open timer .log shows "no critical path found "
 ![image](https://user-images.githubusercontent.com/56647490/152732173-11fd7df2-9ef6-4bcc-bd4b-458f1125201d.png)
 
 ## case e:with CPPR
- 
+![image](https://user-images.githubusercontent.com/56647490/152732568-d20d8ac5-4e87-4cbc-9a01-f286657d58c0.png)
 ## case f:dump_taskflow enable and disable 
- 
+ ![image](https://user-images.githubusercontent.com/56647490/152732352-789e1993-a835-4109-8ecb-cb79cf1cb04c.png) !
 ## case g: dump_graph disabled  and num_paths selections 
- 
+![image](https://user-images.githubusercontent.com/56647490/152732382-0a9a4fb5-fa55-4f9f-aa8f-aa092b97d816.png) !
 ## 1.Timing path
- 
+ ![image](https://user-images.githubusercontent.com/56647490/152732409-2ed31bb0-c35e-4820-9123-1020a21c49ad.png) !
 ## 2.Timing path 
  
 
