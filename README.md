@@ -20,26 +20,32 @@ open timer .log shows "no critical path found "
 open timer .log shows "no critical path found "
 
  
-without CPPR
+## case d:without CPPR
  
-with CPPR
+## case e:with CPPR
  
-dump_taskflow enable and disable this 
+## case f:dump_taskflow enable and disable 
  
-dump_graph disabled  and num_paths selections 
+## case g: dump_graph disabled  and num_paths selections 
  
-1.Timing path
+## 1.Timing path
  
-2.Timing path 
- 
-
-3.Timings path 
+## 2.Timing path 
  
 
-so 3 were  reported without the  timing graph
+## 3.Timings path 
+ 
+
+so 3 timing paths were  reported without the  timing graph
+
+#  Lab2:
+## 1.difference between Early lib and late lib 
+Early -used for min delay
+Late-used for max delay.
+SDC input delay value changes 10.000 reflected in the report.
 
 
-Day3 Labs:
+#  Day3 Labs:
 1. Consider the following picture
 • How many paths do you see F1:CK →F2:D?
 1. F1:CK→U3→U4→U6:A2→U7:A1→F2:D
@@ -58,7 +64,7 @@ Path --input port to D pin :
  
  
 
-from the report it looks like  G0 is input port.Timing from input port to D pin.Would like to understand how it is facing setup and hold in the same path 
+from the report it looks like  G0 is input port.Timing from input port to D pin.Would like to understand how it is facing setup and hold in the same path. 
 
 1.there is no delay between G0 and D pin .Data arrival =0.
 Early.lib findings for DFFR_X2 Pin CK 
@@ -215,11 +221,7 @@ Before Timing ECOs slack = 353.185
 CPPR:6.598
 After timing ECOs
  
-Lab2:
-difference between Early lib and late lib 
-Early -used for min delay
-Late-used for max delay.
-SDC input delay value changes 10.000 reflected in the report.
+
  
 
 Clock Gating Checks:
