@@ -4,7 +4,7 @@
 ## 1.std cell liberty format libs
 ## 2.Netlist
 ## 3.SDC
-
+## 4.SPEF
 # Lab1:
 ## case a: when lib is missing 
  
