@@ -108,90 +108,93 @@ Path --input port to D pin :
 # Clock gating checks:
 ### Clock gating is used when clock path needs to be controlled by signal.
  ![image](https://user-images.githubusercontent.com/56647490/152735417-f9e214c3-3722-44e7-ad73-c9072a280a26.png)
+![image](https://user-images.githubusercontent.com/56647490/152736765-6c9b05f4-56f5-4793-80e9-563a932d3150.png)
+
+
+### Note:
+### 1.AND gate to D flip flop pin is not considered clock downstream
+
+###  Conditions for clock gating check
+### 1. Clock gating cell should be connecting to clock pin of FF/latch,output port , generated clock.
+### 2.why clock gating cell is required : so that it does not create unnecessary edge of the clock in fanout when there is transition at gating cell pin.
+ 
+![image](https://user-images.githubusercontent.com/56647490/152737143-8ae1384c-2f98-4779-9b49-0f723ff311e3.png)
+
+![image](https://user-images.githubusercontent.com/56647490/152737003-75e69146-1463-4997-827b-0a1bcd4bc0bd.png)
+
+### Setup period is checked just before the the clock makes high to low transition.
+### Hold period is checkded just after the clock makes low to high transition. Setup: EN should be stable for Tsetup time before the clock makes high to low transition.
+### Hold: EN should be stable for Thold time after the clock makes transition from low to high.
 
 
  
-Note:
-1.AND gate to D flip flop pin is not considered clock downstream
+### Enable signal should change when clock is low because it will not impact the clock output
+ ### Enable is high it is sending the clock to the output.
+ ### Setup: EN should be stable for Tsetup time before the clock makes low to high transition.
+###  Hold: EN should be stable for Thold time after the clock makes transition from high to low.
 
-Conditions for clock gating check
-1. Clock gating cell should be connecting to clock pin of FF/latch,output port , generated clock.
-2.why clock gating cell is required : so that it does not create unnecessary edge of the clock in fanout when there is transition at gating cell pin.
+
+### Truth Table for AND                                                        
  
-
+###  Truth Table for OR
  
-Setup period is checked just before the the clock makes high to low transition.
-Hold period is checkded just after the clock makes low to high transition.
-Setup: EN should be stable for Tsetup time before the clock makes high to low transition.
-Hold: EN should be stable for Thold time after the clock makes transition from low to high.
-
-
- 
-Enable signal should change when clock is low because it will not impact the clock output
-Enable is high it is sending the clock to the output.
-Setup: EN should be stable for Tsetup time before the clock makes low to high transition.
-Hold: EN should be stable for Thold time after the clock makes transition from high to low.
-
-
-Truth Table for AND                                                        
- 
-Truth Table for OR
- 
-Lab4:
+# Lab4:
  
  
  
 
  
  
-Clock groups :
-Synchronous clocks have deterministic phase relationship
-Asnynchronous clocks have no fixed phase relationship.For Async clocks CDC tool are used .STA cannot handle async clocks.
+### Clock groups :
+### Synchronous clocks have deterministic phase relationship
+###  Asnynchronous clocks have no fixed phase relationship.For Async clocks CDC tool are used .STA cannot handle async clocks.
 
 
  
-Logically exclusive clocks where clocks are chosen by selection.(MUX select). And are prone to crosstalk.
-Physically exclusive clocks are those which cannot co-exist at the same time in a design.And not prone to crosstalk.Same net cannot have both clocks .
+### Logically exclusive clocks where clocks are chosen by selection.(MUX select). And are prone to crosstalk.
+### Physically exclusive clocks are those which cannot co-exist at the same time in a design.And not prone to crosstalk.Same net cannot have both clocks .
 
-set_clock_groups asynchronous-group {clk1 clk2 clk3 } - group {clk4 clk5 clk6}
-there is no relation implied within the group.
-Clock in group1 is aync to clocks in group2
-clk1 is async to clk 4 clk5 clk6 similarly clk2 clk3.
-No relation cannot be assumed among clk1 clk2 clk3
+### set_clock_groups asynchronous-group {clk1 clk2 clk3 } - group {clk4 clk5 clk6}
+### there is no relation implied within the group.
+### Clock in group1 is aync to clocks in group2
+### clk1 is async to clk 4 clk5 clk6 similarly clk2 clk3.
+###  No relation cannot be assumed among clk1 clk2 clk3
  
 
 
  
-When specify one group there is exception --> clk1 clk2 clk3 are async to all other clocks in the design except between the clk1,clk2 ,clk3.
-clock properties:
+### When specify one group there is exception --> clk1 clk2 clk3 are async to all other clocks in the design except between the clk1,clk2 ,clk3.
+
+
+#clock properties:
  
 
-uncertainity:skew of the same clock and inter-clock skew .
-latency :source latency and netwrok latency
-clock sense -> stopping at one point and  whether it is a + ve unate or -ve unate.
-suppose XOR gate is used as inputs for clocks so we can tell the tool whether the clock output of XOR gate is + unate or - unate as it may not be able to sense.
-set_ideal_network --> CTS 
+### uncertainity:skew of the same clock and inter-clock skew .
+### latency :source latency and netwrok latency
+### clock sense -> stopping at one point and  whether it is a + ve unate or -ve unate.
+### suppose XOR gate is used as inputs for clocks so we can tell the tool whether the clock output of XOR gate is + unate or - unate as it may not be able to sense.
+###  set_ideal_network --> CTS 
 
-Timing exception :
-Path specification:
--from
--to
--through
+# Timing exception :
+# Path specification:
+##-from
+##-to
+## -through
  
 
-F1/CK -->U1/A --> U1/Z --> F5/D
-set_path  -from F1/CK -through U1/A  -through U1/Z -to F5/D
-Through options should be according to the order.
+# F1/CK -->U1/A --> U1/Z --> F5/D
+# set_path  -from F1/CK -through U1/A  -through U1/Z -to F5/D
+##Through options should be according to the order.
 
-Set_false_path: Dont time these paths.
-set_false_path - from F1/CK -through U1/A  -through U1/Z -to F5/D to be more particular about the path otherwise it will take all the paths down the F1/CK.
-set_false_path -from {F1/CK F2/CK }-to {F4/D F5/D}
-tool will not time the paths F1/CK to F4/D (existing paths) and F2/CK to F5/D }
-set_multicycle_path -setup 2 -from FF1 -to FF2
+# Set_false_path: Dont time these paths.
+## set_false_path - from F1/CK -through U1/A  -through U1/Z -to F5/D to be more particular about the path otherwise it will take all the paths down the F1/CK.
+## set_false_path -from {F1/CK F2/CK }-to {F4/D F5/D}
+###tool will not time the paths F1/CK to F4/D (existing paths) and F2/CK to F5/D }
+## set_multicycle_path -setup 2 -from FF1 -to FF2
 
-set_multicycle_path -hold 1  -from FF1 -to FF2
+## set_multicycle_path -hold 1  -from FF1 -to FF2
 
-Muticycle path is used to alter the default setup relationship.In case of default 1 cycle it will be 2 cycle  for meet in timing.
+# Muticycle path is used to alter the default setup relationship.In case of default 1 cycle it will be 2 cycle  for meet in timing.
  
 
 multicycle setup relationship also modifies hold.To alter it back to default hold we can use this command.
