@@ -31,10 +31,10 @@ open timer .log shows "no critical path found "
 ## 1.Timing path
  ![image](https://user-images.githubusercontent.com/56647490/152732409-2ed31bb0-c35e-4820-9123-1020a21c49ad.png) !
 ## 2.Timing path 
- 
+![image](https://user-images.githubusercontent.com/56647490/152733357-861d1bdd-2c05-4980-836b-fb1273203b9a.png)
 
 ## 3.Timings path 
- 
+ ![image](https://user-images.githubusercontent.com/56647490/152733413-b8d4f830-3031-4ad3-8dbe-41cc412d21b4.png)
 
 so 3 timing paths were  reported without the  timing graph
 
@@ -54,7 +54,8 @@ SDC input delay value changes 10.000 reflected in the report.
 4. F1:CK→U6→U5:A2→U7:A2→F2:D
 • Type ‘leafpad out.txt’ the slack reported for the path is -212.323
 • Which of the 4 paths above it corresponds to
- 
+ ![image](https://user-images.githubusercontent.com/56647490/152733497-309ce4e8-88e0-4370-ae2b-b45fdd30baf2.png)
+
 report_timing -num_paths 100
 Interesting same path both max and min violations 
 Path --input port to D pin :
