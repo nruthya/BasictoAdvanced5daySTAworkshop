@@ -98,18 +98,16 @@ Path --input port to D pin :
 # OCV :
 ### Inter die Variation related to process --> causing different delays --> gates transition time may be different.
 
- 
-![image](https://user-images.githubusercontent.com/56647490/152735208-cfa8f5de-b5a7-43e4-989d-0dbcd8604be2.png)
+![image](https://user-images.githubusercontent.com/56647490/152744810-0a6ef404-1544-4aad-9488-c16bfefdcc6d.png)
+
 ### Intra die variation: inside a single die there may be different delays due to the timing paths manufactured having process variations.
 ### STA need to take into account the process variations,operating modes .(logical lib should be appropriately seleted according to max/min delay.)
 
-![image](https://user-images.githubusercontent.com/56647490/152735287-4994e240-0992-4f46-afa1-c3a097599d65.png)
+![image](https://user-images.githubusercontent.com/56647490/152745689-037841c8-e41e-4103-be1d-a71b33dfb486.png)
+
  
 # Clock gating checks:
 ### Clock gating is used when clock path needs to be controlled by signal.
- ![image](https://user-images.githubusercontent.com/56647490/152735417-f9e214c3-3722-44e7-ad73-c9072a280a26.png)
-![image](https://user-images.githubusercontent.com/56647490/152736765-6c9b05f4-56f5-4793-80e9-563a932d3150.png)
-
 
 ### Note:
 ### 1.AND gate to D flip flop pin is not considered clock downstream
@@ -120,13 +118,14 @@ Path --input port to D pin :
  
 ![image](https://user-images.githubusercontent.com/56647490/152737143-8ae1384c-2f98-4779-9b49-0f723ff311e3.png)
 
-![image](https://user-images.githubusercontent.com/56647490/152737003-75e69146-1463-4997-827b-0a1bcd4bc0bd.png)
+# Active low clock gating check 
 
 ### Setup period is checked just before the the clock makes high to low transition.
-### Hold period is checkded just after the clock makes low to high transition. Setup: EN should be stable for Tsetup time before the clock makes high to low transition.
+### Hold period is checkded just after the clock makes low to high transition.
+### Setup: EN should be stable for Tsetup time before the clock makes high to low transition.
 ### Hold: EN should be stable for Thold time after the clock makes transition from low to high.
 
-![image](https://user-images.githubusercontent.com/56647490/152738041-b2690eff-d4f9-497e-9330-b73b6122d4e7.png)
+# Active high clock gating check 
  
 ### Enable signal should change when clock is low because it will not impact the clock output
  ### Enable is high it is sending the clock to the output.
@@ -144,10 +143,7 @@ Clock Gating checks:
 # Lab4:
  
  
- ![image](https://user-images.githubusercontent.com/56647490/152738331-dcfbc8c4-c40c-4159-ba5b-8c2416e2bdc9.png)
 
-
- ![image](https://user-images.githubusercontent.com/56647490/152738404-93703777-a3ff-4114-b5ef-efc4cb00c521.png)
  
  ![image](https://user-images.githubusercontent.com/56647490/152738548-abf8eb52-be64-46af-b69e-1fb0ff55d8bc.png)
  
@@ -167,15 +163,19 @@ Clock Gating checks:
 ### clk1 is async to clk 4 clk5 clk6 similarly clk2 clk3.
 ###  No relation cannot be assumed among clk1 clk2 clk3
  
-![image](https://user-images.githubusercontent.com/56647490/152739602-f8da765e-f35e-40ef-8ae0-524964c8066a.png)
+ # set_clock_groups -asynchronous group {clk1 clk2 clk3} -group {Clk 4 clk5 clk6}
+ 
+ # set_clock_groups -asynchronous -group {clk1 clk2 clk3}
 
-![image](https://user-images.githubusercontent.com/56647490/152739713-cfb01de8-bdb4-47a1-ac53-f19c634a6a74.png)
+
 
 ### When specify one group there is exception --> clk1 clk2 clk3 are async to all other clocks in the design except between the clk1,clk2 ,clk3.
 
+# clock properties:
+
 ![image](https://user-images.githubusercontent.com/56647490/152739833-b284293e-2183-4b27-82d0-f9f0b97b981d.png)
 
-# clock properties:
+
  
 
 ### uncertainity:skew of the same clock and inter-clock skew .
@@ -193,20 +193,22 @@ Clock Gating checks:
 
 # F1/CK -->U1/A --> U1/Z --> F5/D
 # set_path  -from F1/CK -through U1/A  -through U1/Z -to F5/D
-##Through options should be according to the order.
+## Through options should be according to the order.
 
 # Set_false_path: Dont time these paths.
 ## set_false_path - from F1/CK -through U1/A  -through U1/Z -to F5/D to be more particular about the path otherwise it will take all the paths down the F1/CK.
 ## set_false_path -from {F1/CK F2/CK }-to {F4/D F5/D}
 
-###tool will not time the paths F1/CK to F4/D (existing paths) and F2/CK to F5/D }
+### tool will not time the paths F1/CK to F4/D (existing paths) and F2/CK to F5/D }
 
 # set_multicycle_path -setup 2 -from FF1 -to FF2
 
 set_multicycle_path -hold 1  -from FF1 -to FF2
 
 Muticycle path is used to alter the default setup relationship.In case of default 1 cycle it will be 2 cycle  for meet in timing.
- ![image](https://user-images.githubusercontent.com/56647490/152740109-ca703e17-3c6c-48bd-9815-8c6be0d16bbf.png)
+ 
+ ![image](https://user-images.githubusercontent.com/56647490/152748333-073f36a8-cd34-4507-b65c-0b5d6e59de08.png)
+
 
 Multicycle setup relationship also modifies hold.To alter it back to default hold we can use this command.
 setup-1 --> hold 
