@@ -234,7 +234,7 @@ set_case_analysis -specify whether design need to be in test mode or functional 
  
  ## CPPR:
 CPPR 69.1 -62.5 = 6.6 
-![image](https://user-images.githubusercontent.com/56647490/152740588-358b140f-0d3f-4836-9043-4db55ae1f220.png)
+
 ECO
  
 ![image](https://user-images.githubusercontent.com/56647490/152740643-75be702e-6037-4837-a6e4-47789b0ac83d.png)
