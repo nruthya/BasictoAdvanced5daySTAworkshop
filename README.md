@@ -7,21 +7,21 @@
 ## 4.SPEF
 # Lab1:
 ## case a: when lib is missing 
- 
+ ![image](https://user-images.githubusercontent.com/56647490/152730805-92c1ed24-548d-4044-bfc4-0cdc95b2021f.png) 
 open timer .log shows only taskflow
  
-
+![image](https://user-images.githubusercontent.com/56647490/152730831-8b7c94d6-7dcf-465c-a2e8-c13bdc9af87f.png) 
 ## case b: when verilog is missing 
 open timer .log shows "no critical path found "
- 
-
- 
+![image](https://user-images.githubusercontent.com/56647490/152730860-ee8d1e30-50e4-4c3a-a1db-64ecc5650a85.png) 
+ ![image](https://user-images.githubusercontent.com/56647490/152730894-5b2bf0d7-c1a6-479e-909f-1329aa5d7ebc.png)
 ## case c: when sdc is missing 
 open timer .log shows "no critical path found "
-
+![image](https://user-images.githubusercontent.com/56647490/152732067-66cd9d66-c882-4072-a5aa-f0f9ff011f7c.png)
  
 ## case d:without CPPR
- 
+![image](https://user-images.githubusercontent.com/56647490/152732173-11fd7df2-9ef6-4bcc-bd4b-458f1125201d.png)
+
 ## case e:with CPPR
  
 ## case f:dump_taskflow enable and disable 
